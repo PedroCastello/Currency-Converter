@@ -135,6 +135,7 @@ const currencySelect = document.getElementById("currency-select")
             currencyName.innerHTML = "Libra"
             currencyImg.src ="./assets/libra 1.png"
         }
+        convertValues()
     }
 
     currencySelect.addEventListener("change", changeCurrency)
