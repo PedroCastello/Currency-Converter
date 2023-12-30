@@ -1,19 +1,21 @@
 const convertButton = document.querySelector(".convert-button");
 
-function convertValues() {
+const convertValues = async () => {
   
   const inputCurrencyValue = document.querySelector(".input-currency").value; // Digitar Valor
   const currencyValueToConvert = document.querySelector(".value-to-convert"); // Valor de cima
   const currencyValueConverted = document.querySelector(".value"); //valor de baixo
 
-  const valorEmDolar = 5;
-  const valorEmEuro = 5.29;
-  const valorEmBtc = 215.995;
-  const valorEmReal = 1;
-  const valorEmLibra= 6.17;
-
-
    
+
+
+const data = await fetch(' https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL,BTC-BRL').then(response => response.json())
+      
+const dolar = data.USDBRL.high
+      
+const euro = data.EURBRL.high
+
+console.log(data)
 
   if (currencySelect.value == "real") {
     currencyValueConverted.innerHTML = new Intl.NumberFormat("pt-BR", {
@@ -26,14 +28,14 @@ function convertValues() {
     currencyValueConverted.innerHTML = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",
-    }).format(inputCurrencyValue / valorEmDolar);
+    }).format(inputCurrencyValue / dolar);
   }
 
   if (currencySelect.value == "euro") {
     currencyValueConverted.innerHTML = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "EUR",
-    }).format(inputCurrencyValue / valorEmEuro);
+    }).format(inputCurrencyValue / euro);
   }
 
   if (currencySelect.value == "libra") {
@@ -79,11 +81,9 @@ function convertValues() {
   }
 
 
+};
 
 
-
-
-}
 const baseCurrency = document.getElementById("base-currency");
 // Moeda de cima
 const currencySelect = document.getElementById("currency-select");
